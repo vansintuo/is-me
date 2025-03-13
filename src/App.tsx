@@ -14,7 +14,6 @@ import {
   useTransform,
   AnimatePresence,
 } from "framer-motion";
-const imageUrl = new URL("./image/DSC_2117.png", import.meta.url).href;
 import { useState } from "react";
 function App() {
   const x = useMotionValue(0);
@@ -95,7 +94,7 @@ function App() {
             {
               icon: Briefcase,
               title: "The National Tanning Training Institute ",
-              text: "Bachelor of imformation technology. 2020 - 2024",
+              text: "Bachelor of imformation technology, 2020 - 2024",
               color: "blue",
             },
             {
@@ -144,7 +143,7 @@ function App() {
             {
               icon: Briefcase,
               title: "Experience",
-              text: "2+ years with Backend Developer At Ly Brother Group.",
+              text: "2+ years with Backend Developer At Ly Brother Group (present).",
               color: "blue",
             },
             {
@@ -226,6 +225,11 @@ function App() {
               "Node.js",
               "PHP",
               "Jquory",
+              "Vue Js",
+              "HTMl",
+              "CSS",
+              "Tailwind CSS",
+              "Bootstrap",
               "My SQL",
               "MongoDB",
               "Firbase",
