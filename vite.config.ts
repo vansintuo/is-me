@@ -9,5 +9,6 @@ export default defineConfig({
   },
   build: {
     assetsInlineLimit: 0, // Prevent inlining small images as base64
-  }
+  },
+  assetsInclude: ['**/*.JPG']
 });

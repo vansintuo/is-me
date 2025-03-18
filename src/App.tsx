@@ -2,10 +2,8 @@ import {
   Github,
   Linkedin,
   Mail,
-  Twitter,
   Briefcase,
   MapPin,
-  Calendar,
   Code2,
 } from "lucide-react";
 import {
@@ -15,6 +13,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { useState } from "react";
+import Image from './image/DSC_2117.JPG';
 function App() {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -52,9 +51,10 @@ function App() {
           >
             <div className="absolute inset-0 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full blur-2xl opacity-20"></div>
             <motion.img
-              src="https://scontent.fpnh9-1.fna.fbcdn.net/v/t39.30808-6/476819260_1658963574987786_8814684893505940238_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFV0POxfkby0vMxsqo_2I6X4knkEJEwriLiSeQQkTCuIuptGIyqkCZ38JeLmivOA-xEg4FfScOXPjk_ClbdiTtX&_nc_ohc=zdD6ePFSL2YQ7kNvgHo_dXr&_nc_oc=Adhwoa6XutUikTK0LkRdr1s37hC4JSIdF7RC2xEcZwLQFica4E8zwGnwsvKqc8oufHs&_nc_zt=23&_nc_ht=scontent.fpnh9-1.fna&_nc_gid=A6VC26uNI1EAO4ceZQNNR2z&oh=00_AYHwwyiYVh0txB_IwKnvhwkUWzSVjwGQFahsXEivOaBrmw&oe=67D87424"
+              // src="https://scontent.fpnh9-1.fna.fbcdn.net/v/t39.30808-6/476819260_1658963574987786_8814684893505940238_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeFV0POxfkby0vMxsqo_2I6X4knkEJEwriLiSeQQkTCuIuptGIyqkCZ38JeLmivOA-xEg4FfScOXPjk_ClbdiTtX&_nc_ohc=zdD6ePFSL2YQ7kNvgHo_dXr&_nc_oc=Adhwoa6XutUikTK0LkRdr1s37hC4JSIdF7RC2xEcZwLQFica4E8zwGnwsvKqc8oufHs&_nc_zt=23&_nc_ht=scontent.fpnh9-1.fna&_nc_gid=A6VC26uNI1EAO4ceZQNNR2z&oh=00_AYHwwyiYVh0txB_IwKnvhwkUWzSVjwGQFahsXEivOaBrmw&oe=67D87424"
+              src={Image}
               alt="Profile"
-              className="relative w-64 h-64 rounded-full object-cover border-4 border-white shadow-lg"
+              className="relative w-80  rounded-full object-cover border-4 border-white shadow-lg"
               whileHover={{ rotate: 5 }}
             />
           </motion.div>
