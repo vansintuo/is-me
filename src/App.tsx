@@ -5,6 +5,7 @@ import {
   Briefcase,
   MapPin,
   Code2,
+  School,
 } from "lucide-react";
 import {
   motion,
@@ -13,7 +14,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { useState } from "react";
-import Image from './image/DSC_2117.JPG';
+import Image from "./image/DSC_2117.JPG";
 function App() {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -92,15 +93,27 @@ function App() {
 
           {[
             {
-              icon: Briefcase,
+              icon: School,
               title: "The National Tanning Training Institute ",
               text: "Bachelor of imformation technology, 2020 - 2024",
               color: "blue",
             },
             {
-              icon: Briefcase,
+              icon: School,
               title: " SabaiCode, Phnom Penh, Cambodia (100% scholarship)",
               text: " Boot Camp full-stack Developer, 2021 - 2022",
+              color: "blue",
+            },
+            {
+              icon: School,
+              title: "Empowering Youth in Cambodia (EYC)",
+              text: "Studied English",
+              color: "blue",
+            },
+            {
+              icon: School,
+              title: "Studied at high school at bunrany hunsen dong tung",
+              text: "diploma high school",
               color: "blue",
             },
           ].map((item, index) => (
@@ -182,12 +195,17 @@ function App() {
         </div>
 
         {/* About Me */}
-        <motion.div
+        {/* <motion.div
           className="bg-white rounded-xl shadow-lg p-8 mb-16"
           style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           whileHover={{ scale: 1.02 }}
+        > */}
+
+        <motion.div
+          className="bg-white rounded-xl shadow-lg p-8 mb-16"
+          style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
         >
           <h2 className="font-bold text-gray-900 text-2xl mb-6">About Me</h2>
           <div className="space-y-4 text-gray-600">
@@ -206,6 +224,61 @@ function App() {
             </p>
           </div>
         </motion.div>
+
+
+          {/* certificate */}
+        {/* <motion.div className="bg-white rounded-xl shadow-lg p-8 mb-16">
+          <h2 className="font-bold text-gray-900 text-2xl mb-6">Certificate</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            {[
+              {
+                icon: Briefcase,
+                title: "Experience",
+                text: "3Month  with Internship Developer At Blue Technology.",
+                color: "blue",
+              },
+              {
+                icon: Briefcase,
+                title: "Experience",
+                text: "2+ years with Backend Developer At Ly Brother Group (present).",
+                color: "blue",
+              },
+              {
+                icon: MapPin,
+                title: "Location",
+                text: "SongKat Tuol Songkea, Khan Russey Keo, Phnom Penh",
+                color: "green",
+              },
+              // { icon: Calendar, title: 'Availability', text: 'Open to work', color: 'purple' }
+            ].map((item, index) => (
+              <motion.div
+                key={item.title}
+                className="bg-white rounded-xl shadow-lg p-6"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.2 }}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow:
+                    "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                }}
+              >
+                <div className="flex items-center gap-4">
+                  <div className={`p-3 bg-${item.color}-50 rounded-lg`}>
+                    <item.icon className={`w-6 h-6 text-${item.color}-600`} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900 text-lg">
+                      {item.title}
+                    </h3>
+                    <p className="text-gray-600 mt-1">{item.text}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </motion.div> */}
 
         {/* Skills */}
         <motion.div
