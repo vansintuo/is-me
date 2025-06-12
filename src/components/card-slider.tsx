@@ -1,71 +1,91 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
-import { motion, AnimatePresence, useMotionValue, useTransform } from "framer-motion"
-import { ChevronLeft, ChevronRight } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { ChevronLeft, ChevronRight, Award, Calendar, MapPin, Clock, GraduationCap, ImageIcon } from "lucide-react"
 
-type CardProps = {
+// Define the type for certificate data
+type CertificateProps = {
   id: number
   title: string
-  description: string
+  organization: string
+  date: string
   image: string
-  color: string
+  studyTour?: {
+    location: string
+    duration: string
+    description: string
+  } | null
 }
 
 export default function CardSlider() {
-  const [cards] = useState<CardProps[]>([
+  const [certificates] = useState<CertificateProps[]>([
     {
       id: 1,
-      title: "Laravel Development",
-      description: "Building robust backend systems with Laravel PHP framework",
-      image: "/placeholder.svg?height=400&width=600",
-      color: "from-red-400 to-red-600",
+      title: "Full Stack Web Development",
+      organization: "SabaiCode Bootcamp",
+      date: "June 2022",
+      image: "./image/Certifacate_FullstackDeveloper.jpg?height=600&width=1000",
+      studyTour: {
+        location: "Phnom Penh, Cambodia",
+        duration: "1 year",
+        description: "Participated in the European Web Development Summit and collaborative projects.",
+      },
     },
     {
       id: 2,
-      title: "Next.js Projects",
-      description: "Creating modern web applications with React and Next.js",
-      image: "/placeholder.svg?height=400&width=600",
-      color: "from-blue-400 to-blue-600",
+      title: "Bachelor of Information Technology",
+      organization: "National Technical Training Institute",
+      date: "May 2024",
+      image: "",
+      studyTour: {
+        location: "Berlin, Germany",
+        duration: "3 weeks",
+        description: "Participated in the European Web Development Summit and collaborative projects.",
+      },
     },
     {
       id: 3,
-      title: "Node.js Development",
-      description: "Developing scalable server-side applications with Node.js",
-      image: "/placeholder.svg?height=400&width=600",
-      color: "from-green-400 to-green-600",
+      title: "Successfully Complete web development Internship",
+      organization: "blue Technology Co. Ltd",
+      date: "January 2023",
+      image: "./image/blue_intern.jpg?height=600&width=800",
     },
     {
       id: 4,
-      title: "MongoDB & MySQL",
-      description: "Working with both SQL and NoSQL database technologies",
-      image: "/placeholder.svg?height=400&width=600",
-      color: "from-purple-400 to-purple-600",
-    },
-    {
-      id: 5,
-      title: "Tailwind CSS Design",
-      description: "Creating beautiful UI components with Tailwind CSS",
-      image: "/placeholder.svg?height=400&width=600",
-      color: "from-teal-400 to-teal-600",
+      title: " Pre-employment and Scholarships Skill Workshop",
+      organization: "Empowering Youth in Cambodia",
+      date: "August 2023",
+      image: "./image/Certificate_Pre-employment and scholarship skills Workshop Volunteer.jpg?height=600&width=800",
+      studyTour: {
+        location: "Phnom Penh, Cambodia",
+        duration: "3 weeks",
+        description: "Participated in the European Web Development Summit and collaborative projects.",
+      },
     },
   ])
 
   const [currentIndex, setCurrentIndex] = useState(0)
   const [direction, setDirection] = useState(0)
   const constraintsRef = useRef(null)
-  const x = useMotionValue(0)
-  const rotateY = useTransform(x, [-100, 100], [-5, 5])
-  const opacity = useTransform(x, [-100, -50, 0, 50, 100], [0.6, 0.8, 1, 0.8, 0.6])
+  const [showFullText, setShowFullText] = useState(false)
+  const [showStudyTourDetails, setShowStudyTourDetails] = useState(false)
+  const [imageError, setImageError] = useState(false)
 
   const handleNext = () => {
     setDirection(1)
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % cards.length)
+    setCurrentIndex((prevIndex) => (prevIndex + 1) % certificates.length)
+    setShowFullText(false)
+    setShowStudyTourDetails(false)
+    setImageError(false)
   }
 
   const handlePrev = () => {
     setDirection(-1)
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + cards.length) % cards.length)
+    setCurrentIndex((prevIndex) => (prevIndex - 1 + certificates.length) % certificates.length)
+    setShowFullText(false)
+    setShowStudyTourDetails(false)
+    setImageError(false)
   }
 
   const handleDragEnd = (_, info) => {
@@ -80,7 +100,7 @@ export default function CardSlider() {
     enter: (direction: number) => ({
       x: direction > 0 ? 1000 : -1000,
       opacity: 0,
-      scale: 0.8,
+      scale: 0.9,
     }),
     center: {
       x: 0,
@@ -93,7 +113,7 @@ export default function CardSlider() {
     exit: (direction: number) => ({
       x: direction < 0 ? 1000 : -1000,
       opacity: 0,
-      scale: 0.8,
+      scale: 0.9,
       transition: {
         duration: 0.5,
       },
@@ -104,15 +124,31 @@ export default function CardSlider() {
   useEffect(() => {
     const interval = setInterval(() => {
       handleNext()
-    }, 5000)
+    }, 6000)
     return () => clearInterval(interval)
   }, [])
 
-  return (
-    <div className="relative w-full max-w-4xl mx-auto perspective-1000 py-16 px-4">
-      <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Project Showcase</h2>
+  const currentCertificate = certificates[currentIndex]
 
-      <div ref={constraintsRef} className="overflow-hidden relative h-[400px] rounded-2xl">
+  // Fix: Check if studyTour exists AND is not null
+  const hasStudyTour = currentCertificate.studyTour !== undefined && currentCertificate.studyTour !== null
+
+  // Function to check if image is valid
+  const isValidImage = (image: string): boolean => {
+    return image !== null && image !== undefined && image !== ""
+  }
+
+  return (
+    <div className="relative w-full max-w-5xl mx-auto py-16 px-4">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-bold text-gray-900 mb-3">My Certificates & Study Tours</h2>
+        <p className="text-gray-600 max-w-2xl mx-auto">
+          Professional certifications, academic achievements, and international study experiences that have shaped my
+          career.
+        </p>
+      </div>
+
+      <div ref={constraintsRef} className="overflow-hidden relative h-[550px] rounded-2xl shadow-xl">
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={currentIndex}
@@ -121,45 +157,153 @@ export default function CardSlider() {
             initial="enter"
             animate="center"
             exit="exit"
-            style={{ rotateY, opacity }}
             drag="x"
             dragConstraints={constraintsRef}
             onDragEnd={handleDragEnd}
-            className="absolute inset-0 w-full h-full"
+            className="absolute inset-0 w-full h-full bg-white"
           >
-            <div className="relative w-full h-full rounded-2xl overflow-hidden shadow-2xl">
-              {/* Background gradient */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${cards[currentIndex].color} opacity-80`}></div>
+            <div className="grid md:grid-cols-2 h-full">
+              {/* Certificate Image */}
+              <div className="relative h-full overflow-hidden bg-gray-100 border-r border-gray-200">
+                <motion.div
+                  initial={{ scale: 1.1, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                  className="relative w-full h-full"
+                >
+                  <div className="absolute inset-0 flex items-center justify-center p-6">
+                    <div className="relative w-full h-full max-h-[400px] shadow-lg rounded-lg overflow-hidden">
+                      {isValidImage(currentCertificate.image) && !imageError ? (
+                        <img
+                          src={currentCertificate.image || "/placeholder.svg"}
+                          alt={currentCertificate.title}
+                          className="w-full h-full object-contain"
+                          onError={(e) => {
+                            setImageError(true)
+                            e.currentTarget.src = "/placeholder.svg?height=600&width=800"
+                          }}
+                        />
+                      ) : (
+                        <div className="w-full h-full flex flex-col items-center justify-center bg-gray-200 text-gray-500">
+                          <ImageIcon className="w-16 h-16 mb-4 opacity-50" />
+                          <div className="text-center px-6">
+                            <p className="font-medium text-lg mb-1">{currentCertificate.title}</p>
+                            <p className="text-sm text-gray-500">Certificate image not available</p>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
 
-              {/* Card content */}
-              <div className="relative z-10 flex flex-col h-full p-8 text-white">
-                <div className="flex-1 flex flex-col justify-center items-center text-center">
-                  <motion.h3
-                    className="text-3xl font-bold mb-4"
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    {cards[currentIndex].title}
-                  </motion.h3>
-                  <motion.p
-                    className="text-lg max-w-md"
-                    initial={{ y: 20, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.3 }}
-                  >
-                    {cards[currentIndex].description}
-                  </motion.p>
+              {/* Certificate Details */}
+              <div className="flex flex-col justify-center p-8 md:p-12 overflow-y-auto">
+                <div
+                  className={`mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full ${
+                    hasStudyTour ? "bg-emerald-50 text-emerald-600" : "bg-blue-50 text-blue-600"
+                  } w-fit`}
+                >
+                  {hasStudyTour ? (
+                    <>
+                      <GraduationCap className="w-4 h-4" />
+                      <span className="text-sm font-medium">Study Tour</span>
+                    </>
+                  ) : (
+                    <>
+                      <Award className="w-4 h-4" />
+                      <span className="text-sm font-medium">Certificate</span>
+                    </>
+                  )}
                 </div>
 
-                <motion.div
-                  className="mt-6 flex justify-center"
+                <motion.h3
+                  className="text-2xl md:text-3xl font-bold text-gray-900 mb-4 line-clamp-2 hover:line-clamp-none cursor-pointer transition-all"
                   initial={{ y: 20, opacity: 0 }}
                   animate={{ y: 0, opacity: 1 }}
-                  transition={{ delay: 0.4 }}
+                  transition={{ delay: 0.2 }}
+                  onClick={() => setShowFullText(!showFullText)}
                 >
-                  <button className="px-6 py-2 bg-white text-gray-900 rounded-full font-medium hover:bg-opacity-90 transition-all">
-                    View Details
+                  {currentCertificate.title}
+                </motion.h3>
+
+                <motion.div
+                  className="space-y-4"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                >
+                  <div className="flex items-start text-gray-600">
+                    <div className="w-24 font-medium mt-0.5">Organization:</div>
+                    <div
+                      className={`${showFullText ? "" : "truncate max-w-[200px]"} cursor-pointer`}
+                      onClick={() => setShowFullText(!showFullText)}
+                      title={currentCertificate.organization}
+                    >
+                      {currentCertificate.organization}
+                    </div>
+                  </div>
+                  <div className="flex items-center text-gray-600">
+                    <div className="w-24 font-medium">Issued:</div>
+                    <div className="flex items-center gap-2">
+                      <Calendar className="w-4 h-4" />
+                      {currentCertificate.date}
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Study Tour Section - Only show if hasStudyTour is true */}
+                {hasStudyTour && (
+                  <motion.div
+                    className="mt-6 pt-6 border-t border-gray-100"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.4 }}
+                  >
+                    <div
+                      className="flex items-center gap-2 text-emerald-600 font-medium mb-3 cursor-pointer"
+                      onClick={() => setShowStudyTourDetails(!showStudyTourDetails)}
+                    >
+                      <GraduationCap className="w-5 h-5" />
+                      <span>Includes Study Tour</span>
+                      <ChevronRight
+                        className={`w-4 h-4 transition-transform ${showStudyTourDetails ? "rotate-90" : ""}`}
+                      />
+                    </div>
+
+                    {showStudyTourDetails && (
+                      <motion.div
+                        className="bg-emerald-50 rounded-lg p-4 space-y-3 text-sm"
+                        initial={{ opacity: 0, height: 0 }}
+                        animate={{ opacity: 1, height: "auto" }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        <div className="flex items-center gap-2 text-emerald-700">
+                          <MapPin className="w-4 h-4 flex-shrink-0" />
+                          <span className="font-medium">Location:</span>
+                          <span>{currentCertificate.studyTour?.location}</span>
+                        </div>
+                        <div className="flex items-center gap-2 text-emerald-700">
+                          <Clock className="w-4 h-4 flex-shrink-0" />
+                          <span className="font-medium">Duration:</span>
+                          <span>{currentCertificate.studyTour?.duration}</span>
+                        </div>
+                        <div className="text-emerald-700">
+                          <p className="mt-2">{currentCertificate.studyTour?.description}</p>
+                        </div>
+                      </motion.div>
+                    )}
+                  </motion.div>
+                )}
+
+                <motion.div
+                  className="mt-6"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 0.5 }}
+                >
+                  <button className="px-6 py-2 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-all">
+                    View Full Certificate
                   </button>
                 </motion.div>
               </div>
@@ -170,15 +314,15 @@ export default function CardSlider() {
         {/* Navigation buttons */}
         <button
           onClick={handlePrev}
-          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all"
-          aria-label="Previous slide"
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white hover:bg-gray-100 p-3 rounded-full shadow-lg transition-all"
+          aria-label="Previous certificate"
         >
           <ChevronLeft className="w-6 h-6" />
         </button>
         <button
           onClick={handleNext}
-          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg transition-all"
-          aria-label="Next slide"
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white hover:bg-gray-100 p-3 rounded-full shadow-lg transition-all"
+          aria-label="Next certificate"
         >
           <ChevronRight className="w-6 h-6" />
         </button>
@@ -186,18 +330,23 @@ export default function CardSlider() {
 
       {/* Indicators */}
       <div className="flex justify-center mt-8 gap-2">
-        {cards.map((_, index) => (
-          <button
+        {certificates.map((cert, index) => (
+          <button 
             key={index}
             onClick={() => {
               setDirection(index > currentIndex ? 1 : -1)
               setCurrentIndex(index)
+              setShowFullText(false)
+              setShowStudyTourDetails(false)
+              setImageError(false)
             }}
-            className={`w-3 h-3 rounded-full transition-all ${
-              index === currentIndex ? "bg-gray-800 w-6" : "bg-gray-300"
+            className={`flex items-center gap-1 h-3 rounded-full transition-all ${
+              index === currentIndex ? "bg-blue-600 px-3" : cert.studyTour ? "bg-emerald-300 w-5" : "bg-gray-300 w-3"
             }`}
-            aria-label={`Go to slide ${index + 1}`}
-          />
+            aria-label={`Go to certificate ${index + 1}`}
+          >
+            {cert.studyTour && index === currentIndex && <GraduationCap className="w-2.5 h-2.5 text-white" />}
+          </button>
         ))}
       </div>
     </div>

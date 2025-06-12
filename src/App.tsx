@@ -16,6 +16,7 @@ import {
 import { useState } from "react";
 import Image from "./components/image/DSC_2117.JPG"
 import CertificateSlider from "./components/certificate-slider";
+import CardSlider from "./components/card-slider";
 function App() {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
@@ -227,8 +228,10 @@ function App() {
         </motion.div>
 
         {/* certificate */}
+        
+        <CardSlider/>
         {/* <CardSlider /> */}
-        <CertificateSlider />
+        {/* <CertificateSlider /> */}
 
         {/* Skills */}
         <motion.div
@@ -266,7 +269,7 @@ function App() {
                   rotateY: 180,
                   transition: { duration: 0.6 },
                 }}
-                onClick={() => setSelectedSkill(skill)}
+                // onClick={() => setSelectedSkill(skill)}
               >
                 <motion.span
                   className="font-medium inline-block"
