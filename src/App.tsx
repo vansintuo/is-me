@@ -14,7 +14,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { useState } from "react";
-import Image from "./components/image/DSC_2117.JPG"
+import Image from "./components/image/DSC_2117.JPG";
 import CertificateSlider from "./components/certificate-slider";
 import CardSlider from "./components/card-slider";
 function App() {
@@ -98,7 +98,7 @@ function App() {
             {
               icon: School,
               title: "National Technical Training Institute              ",
-              text: "Bachelor of imformation technology, 2020 - 2024",
+              text: "Bachelor of imformation technology, 2020 - 2025",
               color: "blue",
             },
             {

@@ -29,25 +29,25 @@ export default function CardSlider() {
       studyTour: {
         location: "Phnom Penh, Cambodia",
         duration: "1 year",
-        description: "Participated in the European Web Development Summit and collaborative projects.",
+        description: "",
       },
     },
     {
       id: 2,
       title: "Bachelor of Information Technology",
       organization: "National Technical Training Institute",
-      date: "May 2024",
+      date: "May 2020 - 2025",
       image: "",
       studyTour: {
         location: "Berlin, Germany",
-        duration: "3 weeks",
-        description: "Participated in the European Web Development Summit and collaborative projects.",
+        duration: "5 years",
+        description: "",
       },
     },
     {
       id: 3,
       title: "Successfully Complete web development Internship",
-      organization: "blue Technology Co. Ltd",
+      organization: "Blue technology Co. Ltd",
       date: "January 2023",
       image: "./image/blue_intern.jpg?height=600&width=800",
     },
@@ -60,7 +60,7 @@ export default function CardSlider() {
       studyTour: {
         location: "Phnom Penh, Cambodia",
         duration: "3 weeks",
-        description: "Participated in the European Web Development Summit and collaborative projects.",
+        description: "",
       },
     },
   ])
@@ -302,9 +302,6 @@ export default function CardSlider() {
                   animate={{ y: 0, opacity: 1 }}
                   transition={{ delay: 0.5 }}
                 >
-                  <button className="px-6 py-2 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-all">
-                    View Full Certificate
-                  </button>
                 </motion.div>
               </div>
             </div>
