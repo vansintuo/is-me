@@ -23,7 +23,7 @@ export default function CardSlider() {
     {
       id: 1,
       title: "Full Stack Web Development",
-      organization: "SabaiCode Bootcamp",
+      organization: " SabaiCode Bootcamp",
       date: "June 2022",
       image: "./image/Certifacate_FullstackDeveloper.jpg?height=600&width=1000",
       studyTour: {
@@ -35,26 +35,26 @@ export default function CardSlider() {
     {
       id: 2,
       title: "Bachelor of Information Technology",
-      organization: "National Technical Training Institute",
+      organization: " National Technical Training Institute",
       date: "May 2020 - 2025",
       image: "",
       studyTour: {
         location: "Berlin, Germany",
-        duration: "5 years",
+        duration: "4.5 years",
         description: "",
       },
     },
     {
       id: 3,
       title: "Successfully Complete web development Internship",
-      organization: "Blue technology Co. Ltd",
-      date: "January 2023",
+      organization: " Blue technology Co. Ltd",
+      date: "February 2023 - April 2023",
       image: "./image/blue_intern.jpg?height=600&width=800",
     },
     {
       id: 4,
       title: " Pre-employment and Scholarships Skill Workshop",
-      organization: "Empowering Youth in Cambodia",
+      organization: " Empowering Youth in Cambodia",
       date: "August 2023",
       image: "./image/Certificate_Pre-employment and scholarship skills Workshop Volunteer.jpg?height=600&width=800",
       studyTour: {

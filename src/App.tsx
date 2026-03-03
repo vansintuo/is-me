@@ -264,11 +264,11 @@ function App() {
               <motion.div
                 key={skill}
                 className="bg-white rounded-xl shadow-lg p-4 text-center cursor-pointer"
-                whileHover={{
-                  scale: 1.1,
-                  rotateY: 180,
-                  transition: { duration: 0.6 },
-                }}
+                // whileHover={{
+                //   scale: 1.1,
+                //   rotateY: 180,
+                //   transition: { duration: 0.6 },
+                // }}
                 // onClick={() => setSelectedSkill(skill)}
               >
                 <motion.span
@@ -297,12 +297,12 @@ function App() {
               <motion.div
                 key={skill}
                 className="bg-white rounded-xl shadow-lg p-4 text-center cursor-pointer"
-                whileHover={{
-                  scale: 1.1,
-                  rotateY: 180,
-                  transition: { duration: 0.6 },
-                }}
-                onClick={() => setSelectedSkill(skill)}
+                // whileHover={{
+                //   scale: 1.1,
+                //   rotateY: 180,
+                //   transition: { duration: 0.6 },
+                // }}
+                // onClick={() => setSelectedSkill(skill)}
               >
                 <motion.span
                   className="font-medium inline-block"
